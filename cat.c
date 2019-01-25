@@ -16,9 +16,15 @@ void output(FILE *fp)
 
 FILE *file_or_stdin(const char *name)
 {
+	FILE *fp;
 	if (strcmp("-", name) == 0)
 		return stdin;
-	return fopen(name, "r");
+	if ((fp = fopen(name, "r")) == NULL)
+	{
+		perror(name);
+		exit(EXIT_FAILURE);
+	}
+	return fp;
 }
 
 int main(int argc, char **argv)
@@ -33,6 +39,12 @@ int main(int argc, char **argv)
 
 	while (*++argv)
 	{
+		if (strcmp("-u", *argv) == 0)
+		{
+			setvbuf(stdout, NULL, _IONBF, 0);
+			continue;
+		}
+
 		current = file_or_stdin(*argv);
 		output(current);
 		if (current != stdin)
