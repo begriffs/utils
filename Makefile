@@ -1,6 +1,6 @@
 CFLAGS = -std=c89 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -Wpedantic -Wshadow -pedantic-errors
 
-PROGS = cat
+PROGS = cat echo
 
 all: $(PROGS)
 
