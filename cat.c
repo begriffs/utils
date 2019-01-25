@@ -50,5 +50,12 @@ int main(int argc, char **argv)
 		if (current != stdin)
 			fclose(current);
 	}
+
+	if (fclose(stdout))
+	{
+		perror("closing stdout");
+		return EXIT_FAILURE;
+	}
+
 	return EXIT_SUCCESS;
 }
